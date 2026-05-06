@@ -7,8 +7,11 @@ class CommandHandler:
     def __init__(self):
         self.api = RobotAPI()
         self.command_map = {
-            52: ("Dancing",      self.api.dance),
-            # 19: ("Go to point A", self.api.go_to_point_a),
+            52: ("Dancing",        self.api.dance),
+            19: ("Go to point A",  self.api.go_to_point_a),
+            20: ("Go to point B",  self.api.go_to_point_b),
+            21: ("Go to point C",  self.api.go_to_point_c),
+            22: ("Go to point D",  self.api.go_to_point_d),
         }
 
     def handle(self, cmd: int):

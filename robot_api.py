@@ -37,25 +37,19 @@ class RobotAPI:
             print(f"[RobotAPI] Unexpected error: {e}")
             return False
 
-    # ── Commands ────────────────────────────────────────────
-
-    def dance(self) -> bool:
-        """Cmd 52 — Dancing (Wave_Body)"""
-        return self._post({"command": "behavior", "name": "Wave_Body"})
-
-    def go_to_point_a(self) -> bool:
-        """Cmd 19 — Go to point A"""
+    def _go_to_point(self, point: str) -> bool:
+        """Generic go-to-point helper — sends {"name": "<point>"} to GO_TO_POINT_URL"""
         try:
             resp = requests.post(
                 GO_TO_POINT_URL,
-                json={"name": "A"},
+                json={"name": point},
                 timeout=TIMEOUT
             )
             if resp.status_code == 200:
-                print(f"[RobotAPI] OK — go_to_point A")
+                print(f"[RobotAPI] OK — go_to_point {point}")
                 return True
             else:
-                print(f"[RobotAPI] HTTP {resp.status_code} — go_to_point A")
+                print(f"[RobotAPI] HTTP {resp.status_code} — go_to_point {point}")
                 return False
         except requests.exceptions.ConnectionError:
             print(f"[RobotAPI] Connection error — robot unreachable at {ROBOT_IP}")
@@ -66,3 +60,25 @@ class RobotAPI:
         except Exception as e:
             print(f"[RobotAPI] Unexpected error: {e}")
             return False
+
+    # ── Commands ────────────────────────────────────────────
+
+    def dance(self) -> bool:
+        """Cmd 52 — Dancing (Wave_Body)"""
+        return self._post({"command": "behavior", "name": "Wave_Body"})
+
+    def go_to_point_a(self) -> bool:
+        """Cmd 19 — Go to point A"""
+        return self._go_to_point("A")
+
+    def go_to_point_b(self) -> bool:
+        """Cmd 20 — Go to point B"""
+        return self._go_to_point("B")
+
+    def go_to_point_c(self) -> bool:
+        """Cmd 21 — Go to point C"""
+        return self._go_to_point("C")
+
+    def go_to_point_d(self) -> bool:
+        """Cmd 22 — Go to point D"""
+        return self._go_to_point("D")
