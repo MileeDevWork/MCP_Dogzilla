@@ -16,7 +16,7 @@ class Speech(object):
             print("[Speech] Serial Open Failed:", e)
             self.ser = None
 
-        self.buffer = b''  
+        self.buffer = b''
 
     def __del__(self):
         if self.ser and self.ser.isOpen():
@@ -28,7 +28,7 @@ class Speech(object):
     # =========================
     def void_write(self, void_data):
         """
-        G?i l?nh ph�t �m thanh: $Axxx#
+        Gui lenh phat am thanh: $Axxx#
         """
         try:
             void_data = int(void_data)
