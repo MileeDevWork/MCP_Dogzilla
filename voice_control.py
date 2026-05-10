@@ -1,5 +1,6 @@
 from Speech_Lib import Speech
 from command_handler import CommandHandler
+import time
 
 spe = Speech("/dev/ttyUSB0")
 handler = CommandHandler()
