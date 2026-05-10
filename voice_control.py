@@ -8,7 +8,25 @@ print("Listening for voice commands...")
 
 while True:
     cmd = spe.speech_read()
-    if cmd != 999 and cmd in handler.command_map:
-        print(f"[SPEECH] Detected cmd: {cmd}")
-        spe.void_write(cmd)
-        handler.handle(cmd)
+
+    if cmd != 999:
+        start_process = time.time()
+
+        if cmd in handler.command_map:
+            label = handler.command_map[cmd][0]
+
+            print(f"\n" + "="*30)
+            print(f"[TESTCASE] Lệnh nhận diện: {label} (ID: {cmd})")
+
+            spe.void_write(cmd)
+            handler.handle(cmd)
+
+            end_process = time.time()
+
+            latency = (end_process - start_process) * 1000
+
+            print(f"[METRIC] Thời gian xử lý hệ thống: {latency:.2f}ms")
+            print(f"[STATUS] Kết quả: Thành công")
+            print("="*30 + "\n")
+        else:
+            print(f"[DEBUG] Nhận được ID {cmd} nhưng chưa định nghĩa trong Command Map.")
