@@ -12,6 +12,7 @@ class CommandHandler:
             20: ("Go to point B",  self.api.go_to_point_b),
             21: ("Go to point C",  self.api.go_to_point_c),
             22: ("Go to point D",  self.api.go_to_point_d),
+            2: (Stop, self.api.stop),
         }
 
     def handle(self, cmd: int):
